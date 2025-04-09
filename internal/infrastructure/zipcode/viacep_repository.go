@@ -21,7 +21,7 @@ type ViaCEPResponse struct {
 	Gia         string `json:"gia"`
 	DDD         string `json:"ddd"`
 	Siafi       string `json:"siafi"`
-	Erro        bool   `json:"erro"`
+	Erro        string `json:"erro"`
 }
 
 type ViaCEPRepository struct {
@@ -55,7 +55,7 @@ func (r *ViaCEPRepository) GetLocationByZipCode(zipCode string) (*repository.Loc
 		return nil, err
 	}
 
-	if viaCEPResp.Erro || viaCEPResp.Localidade == "" {
+	if viaCEPResp.Erro == "true" {
 		return nil, errors.New("can not find zipcode")
 	}
 
